@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotFound
+from django.shortcuts import render, redirect
 
 
 # Create your views here.
@@ -21,4 +21,11 @@ def archive(request, year):
 
 
 def archive_by_month(request, month):
-    return HttpResponse(f'<h1>Archive by years</h1><p>Month: {month}</p>')
+    if 0 < month < 13:
+        return HttpResponse(f'<h1>Archive by years</h1><p>Month: {month}</p>')
+
+    return redirect('/')
+
+
+def page_not_found(request, exception):
+    return HttpResponseNotFound('<h1>Page not found</h1>')
