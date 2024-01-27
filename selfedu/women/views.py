@@ -1,11 +1,18 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect
 
-
 # Create your views here.
 
+menu = ['About Us', 'Add an Article', 'Feedback', 'Login']
+
+
 def index(request):
-    return HttpResponse('Women application page')
+    data = {'title': 'Main Page', 'menu': menu}
+    return render(request, 'women/index.html', context=data)
+
+
+def about(request):
+    return render(request, 'women/about.html', {'title': 'About Us', 'menu': menu})
 
 
 def categories(request, cat_id: int):
