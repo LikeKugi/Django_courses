@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 
-menu = ['About Us', 'Add an Article', 'Feedback', 'Login']
+menu = [{'home': 'Main Page'}, {'about': 'About Us'}, {'add_page': 'Add an Article'}, {'feedback': 'Feedback'},
+        {'login': 'Login'}]
 
 
 def index(request):
@@ -13,6 +14,22 @@ def index(request):
 
 def about(request):
     return render(request, 'women/about.html', {'title': 'About Us', 'menu': menu})
+
+
+def add_page(request):
+    return HttpResponse(f'<h1>Adding Page</h1>')
+
+
+def feedback(request):
+    return HttpResponse(f'<h1>Feedback</h1>')
+
+
+def login(request):
+    return HttpResponse(f'<h1>Login</h1>')
+
+
+def get_post_by_id(request, post_id):
+    return HttpResponse(f'<h1>Post with {post_id} ID</h1>')
 
 
 def categories(request, cat_id: int):
