@@ -1,0 +1,15 @@
+{% load static %}
+
+<a href="{% url 'home' %}"><img src="{% static 'women/images/main.ico' %}" alt="Main Page"></a>
+
+<nav class="header__nav nav">
+    <ul class="nav__list">
+        {% for route in menu %}
+            <li class="nav__item">
+                {% for path, description in route.items %}
+                    <a class="nav__link" href="{% url path %}">{{ description }}</a>
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

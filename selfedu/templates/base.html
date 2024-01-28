@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/women/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'women/images/main.ico' %}" type="image/x-icon"/>
+    <title>{{ title }} | Women App</title>
+</head>
+<body>
+<div class="root">
+    <header class="header">
+        <div class="container header__container">
+            {% include 'women/includes/menu.html' %}
+        </div>
+    </header>
+    <div class="root__content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer class="footer">
+        <div class="container footer__container">
+            {% block footer %} {% endblock %}
+        </div>
+    </footer>
+</div>
+</body>
+</html>
