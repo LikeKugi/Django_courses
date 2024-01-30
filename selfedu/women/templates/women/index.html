@@ -2,9 +2,21 @@
 
 {% block content %}
 
-<h1>{{ title }}</h1>
-<div class="app">
-    <a href="{% url 'post' 'sug_name' %}">Some address</a>
-</div>
+    <h1>{{ title }}</h1>
+    <div class="app">
+        <ul class="list-articles">
+            {% for post in posts %}
+                {% if post.is_published %}
+                    <li><h2>{{ p.title }}</h2></li>
+                    {% autoescape off %}
+                        {{ p.content|linebreaks|truncatewords:20 }}
+                    {% endautoescape %}
+                    <li class="clear"></li>
+                    <p class="link-read-post"><a href="{{ post.get_absolute_url }}">read post</a></p>
+                {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
 
 {% endblock %}

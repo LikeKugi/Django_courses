@@ -1,5 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
+from women.models import Women
 
 # Create your views here.
 
@@ -8,7 +10,8 @@ menu = [{'home': 'Main Page'}, {'about': 'About Us'}, {'add_page': 'Add an Artic
 
 
 def index(request):
-    data = {'title': 'Main Page', 'menu': menu}
+    posts = Women.objects.filter(is_published=1)
+    data = {'title': 'Main Page', 'menu': menu, 'posts': posts}
     return render(request, 'women/index.html', context=data)
 
 
@@ -29,7 +32,16 @@ def login(request):
 
 
 def get_post_by_id(request, post_id):
-    return HttpResponse(f'<h1>Post with {post_id} ID</h1>')
+    post = get_object_or_404(Women, pk=post_id)
+
+    data = {
+        'title': post.title,
+        'menu': menu,
+        'post': post,
+        'cat_selected': 1,
+    }
+
+    return render(request, 'women/post.html', context=data)
 
 
 def categories(request, cat_id: int):
