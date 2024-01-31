@@ -10,7 +10,7 @@ menu = [{'home': 'Main Page'}, {'about': 'About Us'}, {'add_page': 'Add an Artic
 
 
 def index(request):
-    posts = Women.objects.filter(is_published=1)
+    posts = Women.published.all()
     data = {'title': 'Main Page', 'menu': menu, 'posts': posts}
     return render(request, 'women/index.html', context=data)
 
@@ -31,8 +31,8 @@ def login(request):
     return HttpResponse(f'<h1>Login</h1>')
 
 
-def get_post_by_id(request, post_id):
-    post = get_object_or_404(Women, pk=post_id)
+def get_post_by_id(request, post_slug):
+    post = get_object_or_404(Women, slug=post_slug)
 
     data = {
         'title': post.title,

@@ -6,4 +6,5 @@
         <div><img src="{{ post.photo.url }}" alt="{{ post.title }}" class="img-article-left"></div>
     {% endif %}
     {{ post.content|linebreaks }}
+    <p><a href="{% url 'home' %}">Back</a></p>
 {% endblock %}
