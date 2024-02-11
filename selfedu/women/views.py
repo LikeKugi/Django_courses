@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 
-from women.models import Women
+from women.models import Women, Category
 
 # Create your views here.
 
@@ -49,7 +49,17 @@ def categories(request, cat_id: int):
 
 
 def categories_by_slug(request, cat_slug):
-    return HttpResponse(f'<h1>Articles by slug</h1><p>Slug: {cat_slug}</p>')
+    category = get_object_or_404(Category, slug=cat_slug)
+    posts = Women.published.filter(cat_id=category.pk)
+
+    data = {
+        'title': f'Рубрика: {category.name}',
+        'menu': menu,
+        'posts': posts,
+        'cat_selected': cat_slug,
+    }
+
+    return render(request, 'women/index.html', context=data)
 
 
 def archive(request, year):
